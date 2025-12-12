@@ -1,35 +1,6 @@
-use clap::{Parser, Subcommand};
+use cli::cli_module::{Cli,Commands,Parser};
+use cli::cli_module::store::Commands as StoreCommands;
 
-#[derive(Parser)]
-struct  Cli {
-    #[command(subcommand)]
-    command : Option<Commands>,
-}
-
-#[derive(Subcommand)]
-enum  Commands {
-    #[command(subcommand)]
-    Store (StoreCommands)
-}
-
-#[derive(Subcommand)]
-enum StoreCommands{
-    Create{
-        #[arg(long)]
-        name : String
-    },
-    Delete{
-        #[arg(long)]
-        id : usize
-    },
-    Rename{
-        #[arg(long)]
-        id : usize,
-        #[arg(long)]
-        name: String
-    },
-    List
-}
 
 fn main(){
     let args = Cli::parse();
